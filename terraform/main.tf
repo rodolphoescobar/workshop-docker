@@ -109,5 +109,5 @@ resource "aws_key_pair" "generated_key" {
 }
 
 output "ssh_connect" {
-  value = "ssh -i rodolpho-key.pem ec2-user@${aws_instance.docker-instance.public_ip}"
+  value = "ssh -i ${var.prefix-name}-key.pem ec2-user@${aws_instance.docker-instance.public_ip}"
 }
