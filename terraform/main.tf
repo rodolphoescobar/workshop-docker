@@ -38,7 +38,7 @@ resource "aws_instance" "docker-instance" {
     yum update -y
 		#######################
     #install docker
-    yum install -y docker
+    yum install -y docker git
 		systemctl start docker
 		systemctl enable docker
     usermod -aG docker ec2-user
@@ -69,6 +69,14 @@ resource "aws_security_group" "allow_port80" {
     description      = "Port 80 from MyIP"
     from_port        = 80
     to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["${data.http.ip.response_body}/32"]
+  }
+
+  ingress {
+    description      = "Port 443 from MyIP"
+    from_port        = 443
+    to_port          = 443
     protocol         = "tcp"
     cidr_blocks      = ["${data.http.ip.response_body}/32"]
   }
