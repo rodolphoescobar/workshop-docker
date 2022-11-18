@@ -82,6 +82,14 @@ resource "aws_security_group" "allow_port80" {
   }
 
   ingress {
+    description      = "Port 9000 from MyIP"
+    from_port        = 9000
+    to_port          = 9000
+    protocol         = "tcp"
+    cidr_blocks      = ["${data.http.ip.response_body}/32"]
+  }
+
+  ingress {
     description      = "Port 22 from MyIP"
     from_port        = 22
     to_port          = 22
