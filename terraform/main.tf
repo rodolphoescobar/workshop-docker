@@ -48,7 +48,7 @@ resource "aws_instance" "docker-instance" {
     curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
     #######################
-    docker run -d -p 80:80 dockersamples/static-site
+    git clone https://github.com/rodolphoescobar/workshop-docker.git
 	EOF
     tags = {
         Name = "${var.prefix-name}-instance"
