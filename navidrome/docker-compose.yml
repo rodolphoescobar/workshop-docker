@@ -3,7 +3,7 @@ services:
   navidrome:
     image: deluan/navidrome:latest
     ports:
-      - "4533:4533"
+      - 4533
     environment:
       ND_SCANINTERVAL: 15m
       ND_LOGLEVEL: info
@@ -11,3 +11,9 @@ services:
     volumes:
       - "./data:/data"
       - "./data/music:/music:ro"
+    networks:
+      - proxy-net
+networks:
+  proxy-net:
+    driver: bridge
+    name: nginx_proxy_network
